@@ -1,10 +1,8 @@
 package services;
 
-import interfaces.cruds.Create;
-import interfaces.cruds.Delete;
-import interfaces.cruds.Read;
-import interfaces.cruds.Update;
+import interfaces.Crud;
 import models.Note;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repositories.NoteDao;
 
@@ -12,9 +10,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+public class NoteService implements Crud<Note, Long> {
+    private final NoteDao dao;
 
-public class NoteService implements Create<Note>, Read<Note, Long>, Update<Note>, Delete<Long> {
-    private NoteDao dao = new NoteDao();
+    @Autowired
+    public NoteService(NoteDao dao) {
+        this.dao = dao;
+    }
 
     @Override
     public void add(Note note) {

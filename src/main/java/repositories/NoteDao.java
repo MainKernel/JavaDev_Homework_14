@@ -1,18 +1,21 @@
 package repositories;
 
-import interfaces.cruds.Create;
-import interfaces.cruds.Delete;
-import interfaces.cruds.Read;
-import interfaces.cruds.Update;
+import interfaces.Crud;
 import models.Note;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import utils.DataBase;
 
 import java.util.List;
 import java.util.Optional;
+@Service
+public class NoteDao implements Crud<Note, Long> {
 
-public class NoteDao implements Create<Note>, Read<Note, Long>, Update<Note>, Delete<Long> {
-
-    private final DataBase dataBase = DataBase.getINSTANCE();
+    private final DataBase dataBase;
+    @Autowired
+    public NoteDao(DataBase dataBase) {
+        this.dataBase = dataBase;
+    }
 
     @Override
     public void add(Note note) {

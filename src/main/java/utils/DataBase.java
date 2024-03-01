@@ -1,27 +1,20 @@
 package utils;
 
+import jakarta.annotation.PostConstruct;
 import models.Note;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Component
 public  class DataBase {
     private static Long id = 0L;
     private static final List<Note> DATABASE = new ArrayList<>();
 
-    private static final DataBase INSTANCE;
+    public DataBase() {
 
-    static {
-        INSTANCE = new DataBase();
-    }
-
-    private DataBase() {
-
-    }
-
-    public static DataBase getINSTANCE() {
-        return INSTANCE;
     }
 
     public void persist(Note note){
